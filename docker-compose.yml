@@ -1,0 +1,64 @@
+version: '3.9'
+
+services:
+  gateway:
+    container_name: gateway_service
+    build:
+      context: ../grupo_1/Gateway
+      dockerfile: ./Dockerfile_gateway
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../grupo_1/Gateway:/var/www/html
+    networks:
+      - microservices_network
+    depends_on:
+      - mysql
+
+  notificaciones:
+    container_name: notificaciones_service
+    build:
+      context: ../grupo_1/notificaciones
+      dockerfile: ./Dockerfile_notificaciones
+    ports:
+      - "8001:8001"
+    volumes:
+      - ../grupo_1/notificaciones:/var/www/html
+    networks:
+      - microservices_network
+    depends_on:
+      - mysql
+
+  sistema:
+    container_name: sistema_service
+    build:
+      context: ../grupo_1/sistema
+      dockerfile: ./Dockerfile_sistema
+    ports:
+      - "5000:5000"
+    volumes:
+      - ../grupo_1/sistema:/app
+    networks:
+      - microservices_network
+
+  mysql:
+    container_name: mysql_service
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: proyecto
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - microservices_network
+
+networks:
+  microservices_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
