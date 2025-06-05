@@ -5,7 +5,7 @@ services:
     container_name: gateway_service
     build:
       context: ../grupo_1/Gateway
-      dockerfile: ./Dockerfile_gateway
+      dockerfile: ../../proyecto-software-ii/Dockerfile_gateway
     ports:
       - "8000:8000"
     volumes:
@@ -19,7 +19,7 @@ services:
     container_name: notificaciones_service
     build:
       context: ../grupo_1/notificaciones
-      dockerfile: ./Dockerfile_notificaciones
+      dockerfile: ../../proyecto-software-ii/Dockerfile_gateway
     ports:
       - "8001:8001"
     volumes:
@@ -33,7 +33,7 @@ services:
     container_name: sistema_service
     build:
       context: ../grupo_1/sistema
-      dockerfile: ./Dockerfile_sistema
+      dockerfile: ../../proyecto-software-ii/Dockerfile_flask
     ports:
       - "5000:5000"
     volumes:
