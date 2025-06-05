@@ -2,11 +2,15 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY requirements.txt .
+# Copia el requirements.txt desde la carpeta grupo_1/sistema
+COPY ../grupo_1/sistema/requirements.txt .
+
 RUN pip install -r requirements.txt
 
-COPY . .
+# Copia todo el código de Flask desde grupo_1/sistema
+COPY ../grupo_1/sistema/ .
 
 EXPOSE 5000
 
 CMD ["python", "app.py"]
+
